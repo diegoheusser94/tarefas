@@ -3,6 +3,7 @@
 session_start();
 
 include "banco.php";
+include "ajudantes.php";
 
 if (isset($_GET['nome']) && $_GET['nome'] != '') {
 	$tarefa = array();
