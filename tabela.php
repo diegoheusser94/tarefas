@@ -25,6 +25,11 @@
 				Remover
 			</a>
 		</td>
+		<td>
+			<a href="tarefa.php?id=<?php $tarefa['id']; ?>">
+				<?php echo $tarefa['nome']; ?>
+			</a>
+		</td>
 	</tr>
 	<?php endforeach; ?>
 </table>
