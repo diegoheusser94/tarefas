@@ -60,3 +60,25 @@ function remover_tarefa($conexao, $id){
 	$sqlRemover = "DELETE FROM tarefas WHERE id = {$id}";
 	mysqli_query($conexao, $sqlRemover);
 }
+
+function gravar_anexo($conexao, $anexo){
+	$sqlGravar = "INSERT INTO anexos
+		(tarefa_id, nome, arquivo)
+		VALUES
+		(
+			{$anexo['tarefa_id']},
+			'{$anexo['nome']}',
+			'{$anexo['arquivo']}'
+		)";
+		mysqli_query($conexao, $sqlGravar);
+}
+
+function buscar_anexos($conexao, $tarefa_id){
+	$sql = "SELECT * FROM anexos WHERE tarefa_id = {$tarefa_id}";
+	$resultado = mysqli_query($conexao, $sql);
+	$anexos = array();
+	while ($anexo = mysqli_fetch_assoc($resultado)){
+		$anexos[] = $anexo;
+	}
+	return $anexos;
+}
