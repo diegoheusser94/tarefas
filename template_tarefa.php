@@ -13,7 +13,11 @@
 		</p>
 		<p>
 			<strong>Concluída:</strong>
-			<?php echo traduz_concluida($tarefa['descricao']); ?>
+			<?php echo traduz_concluida($tarefa['concluida']); ?>
+		</p>
+		<p>
+			<strong>Descrição:</strong>
+			<?php echo nl2br($tarefa['descricao']); ?>
 		</p>
 		<p>
 			<strong>Prazo:</strong>
