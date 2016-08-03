@@ -54,7 +54,7 @@ if (tem_post()) {
 	}
 }
 
-$tarefa = buscar_tarefa($conexao, $_POST['id']);
+$tarefa = buscar_tarefa($conexao, $_GET['id']);
 
 $tarefa['nome'] = (isset($_POST['nome']))?$_POST['nome']:$tarefa['nome'];
 $tarefa['descricao'] = (isset($_POST['descricao']))?$_POST['descricao']:$tarefa['descricao'];
