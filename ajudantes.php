@@ -1,6 +1,6 @@
 <?php
 
-include "bibliotecas/PHPMailer/PHPMailerAutoload.php";
+
 
 function traduz_prioridade($codigo) {
 	$prioridade = '';
@@ -83,18 +83,28 @@ function tratar_anexo($anexo){
 }
 
 function enviar_email($tarefa, $anexos = array()){
-	$corpo = include "template_email.php";
-	//Acessar o sistema de e-mails;
-	//Fazer a autenticação com usuário e senha;
-	//Usar a opção para escrever um e-mail;
-	//Digitar o e-mail do destinatário;
-	//Digitar o assunto do e-mail;
-	//Escrever o corpo do e-mail;
-	//Adicionar os anexos quando necessários;
-	//Usar a opção de enviar o e-mail.
+	include "bibliotecas/PHPMailer/PHPMailerAutoload.php";
+	$corpo = preparar_corpo_email($tarefa, $anexos);
+	$email = new PHPMailer();
+	$email->isSMTP();
+	$email->Host = 'smtp.gmail.com';
+	$email->Port = 587;
+	$email->SMTPSecure = 'tls';
+	$email->SMTPAuth = true;
+	$email->Password = 'senha';
+	$email->Username = 'diego.heusser@gmail.com';
+	$email->setFrom('diego.heusser@gmail.com','Avisador de Tarefas');
+	$email->addAddress(EMAIL_NOTIFICACAO);
+	$email->Subject = "Aviso de tarefa: {$tarefa['nome']}";
+	$email->msgHTML($corpo);
+	foreach($anexos as $anexo) {
+		$email->addAttachment("anexos/{anexo['arquivo']}");
+	}
+	$email->send();
 }
 
 function preparar_corpo_email($tarefa, $anexos){
+	$corpo = include "template_email.php";
 	ob_start();
 	include "template_email.php";
 	ob_end_clean();
