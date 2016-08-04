@@ -1,5 +1,7 @@
 <?php
 
+include "bibliotecas/PHPMailer/PHPMailerAutoload.php";
+
 function traduz_prioridade($codigo) {
 	$prioridade = '';
 	switch ($codigo) {
@@ -80,3 +82,21 @@ function tratar_anexo($anexo){
 	return true;
 }
 
+function enviar_email($tarefa, $anexos = array()){
+	$corpo = include "template_email.php";
+	//Acessar o sistema de e-mails;
+	//Fazer a autenticação com usuário e senha;
+	//Usar a opção para escrever um e-mail;
+	//Digitar o e-mail do destinatário;
+	//Digitar o assunto do e-mail;
+	//Escrever o corpo do e-mail;
+	//Adicionar os anexos quando necessários;
+	//Usar a opção de enviar o e-mail.
+}
+
+function preparar_corpo_email($tarefa, $anexos){
+	ob_start();
+	include "template_email.php";
+	ob_end_clean();
+	return $corpo;
+}

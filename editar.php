@@ -2,6 +2,7 @@
 
 session_start();
 
+include "config.php";
 include "banco.php";
 include "ajudantes.php";
 
@@ -49,6 +50,10 @@ if (tem_post()) {
 	
 	if(!$tem_erros){
 		editar_tarefa($conexao, $tarefa);
+		if (isset($_POST['lembrete']) && $_POST['lembrete'] == 1){
+			$anexos = buscar_anexos($conexao, $tarefa['id']);
+			enviar_email($tarefa, $anexos);
+		}
 		header('Location: tarefas.php');
 		die();	
 	}
